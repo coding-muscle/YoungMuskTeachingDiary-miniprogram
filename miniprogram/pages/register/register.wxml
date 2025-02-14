@@ -1,0 +1,26 @@
+<view class="container">
+  <view class="form">
+    <input
+      type="number"
+      placeholder="请输入手机号"
+      bindinput="inputPhone"
+    />
+    <input
+      password
+      placeholder="请输入密码"
+      bindinput="inputPassword"
+    />
+    <input
+      password
+      placeholder="请重复密码"
+      bindinput="inputConfirmPassword"
+    />
+
+    <van-button type="primary" class="register-btn" size="large" bind:click="register">
+      注册
+    </van-button>
+    <navigator url="/pages/login/login" open-type="navigate">
+      已有账号？去登录
+    </navigator>
+  </view>
+</view>

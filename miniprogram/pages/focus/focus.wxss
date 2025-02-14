@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .input-container {
+    margin-bottom: 20px;
+  }
+  
+  input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 200px;
+    text-align: center;
+  }
+  
+  button {
+    margin-bottom: 20px;
+  }
+  
+  .countdown {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }

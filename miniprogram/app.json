@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/register/register",
+    "pages/setProfile/setProfile",
+    "pages/course/course",
+    "pages/homework/homework",
+    "pages/focus/focus",
+    "pages/statistic/statistic",
+    "pages/profile/profile" 
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "羊斯克教学日记"
+  },
+  "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#00BFFF",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "pagePath": "pages/course/course",
+        "text": "课程"
+      },
+      {
+        "pagePath": "pages/homework/homework",
+        "text": "作业"
+      },
+      {
+        "pagePath": "pages/focus/focus",
+        "text": "专注"
+      },
+      {
+        "pagePath": "pages/statistic/statistic",
+        "text": "统计"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "van-button": "@vant/weapp/button/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-calendar": "@vant/weapp/calendar/index"
+  }
+}

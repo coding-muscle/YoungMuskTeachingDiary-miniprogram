@@ -1,0 +1,16 @@
+<view class="container">
+  <view class="input-container">
+    <input
+      type="number"
+      placeholder="请输入专注时间（分钟）"
+      bindinput="onInputChange"
+      value="{{focusTime}}"
+    />
+  </view>
+  <button bindtap="startCountdown" disabled="{{isCounting}}">
+    {{isCounting ? '倒计时中...' : '开始专注'}}
+  </button>
+  <view class="countdown">
+    <text>剩余时间：{{countdown}}</text>
+  </view>
+</view>

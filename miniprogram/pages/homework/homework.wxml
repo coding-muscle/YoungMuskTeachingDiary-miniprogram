@@ -1,0 +1,33 @@
+<view class="container">
+  <!-- 筛选按钮 -->
+  <view class="filter-buttons">
+    <button
+      class="{{currentFilter === 'uncompleted' ? 'active' : ''}}"
+      bindtap="filterUncompleted"
+    >
+      未完成
+    </button>
+    <button
+      class="{{currentFilter === 'completed' ? 'active' : ''}}"
+      bindtap="filterCompleted"
+    >
+      已完成
+    </button>
+  </view>
+
+  <!-- 作业卡片 -->
+  <block wx:for="{{filteredHomeworks}}" wx:key="index">
+    <view class="card">
+      <view class="card-header">
+        <text class="title">作业内容：{{item.content}}</text>
+      </view>
+      <view class="card-body">
+        <text class="info">布置时间：{{item.time}}</text>
+        <text class="info">布置教师：{{item.teacher}}</text>
+        <text class="info {{item.status === '已完成' ? 'completed' : 'uncompleted'}}">
+          完成情况：{{item.status}}
+        </text>
+      </view>
+    </view>
+  </block>
+</view>

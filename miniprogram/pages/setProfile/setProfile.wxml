@@ -1,0 +1,27 @@
+<view class="container">
+  <!-- 姓名输入 -->
+  <view class="input-container">
+    <input
+      type="text"
+      placeholder="请输入姓名（如果您是家长，请输入孩子姓名）"
+      bindinput="onNameInput"
+      value="{{name}}"
+    />
+  </view>
+
+  <!-- 身份选择 -->
+  <view class="input-container">
+    <picker mode="selector" range="{{roles}}" bindchange="onRoleChange">
+      <view class="picker">选择身份：{{selectedRole}}</view>
+    </picker>
+  </view>
+
+  <!-- 头像上传 -->
+  <!-- <view class="input-container">
+    <button bindtap="uploadAvatar">上传头像</button>
+    <image class="avatar" src="{{avatarUrl}}" wx:if="{{avatarUrl}}"></image>
+  </view> -->
+
+  <!-- 保存按钮 -->
+  <button class="save-button" bindtap="saveProfile">保存</button>
+</view>

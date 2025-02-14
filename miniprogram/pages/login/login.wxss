@@ -1,0 +1,23 @@
+.container {
+  padding: 20px;
+  height: 45rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-input {
+  width: 89%;
+  height: 45px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0 10px;
+}
+
+.form-nav {
+  margin-top: 20px;
+  text-align: center;
+  color: #07c160;
+}

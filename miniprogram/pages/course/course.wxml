@@ -1,0 +1,68 @@
+<view class="page-container">
+  <!-- 如果没有课程，显示提示 -->
+  <view wx:if="{{courses.length === 0}}" class="swiper-container">
+    <view class="card">
+      <image class="card-bg" src="../../images/backgroundimages/image.png"></image>
+      <view class="card-content">
+        <view class="card-header">
+          <text class="no-course-tip">本日没有课程，请选择其他日期</text>
+        </view>
+        <view class="card-footer">
+          <!-- 左边内容 -->
+          <view class="wisdom-left">
+            <text class="wisdom insight">看见智慧Wisdom insight：</text>
+            <text class="wisdom word">为什么要写悲观的事情，因为我们足够乐观和勇敢，才会选择直面悲观。</text>
+          </view>
+          <!-- 右边内容 -->
+          <text class="wisdom quotation">---电影《好东西》</text>
+        </view>
+      </view>
+      <text class="card-footer-tip">小提示：再次点击课程可以选择日期(*^▽^*)</text>
+    </view>
+  </view>
+  <!-- 课程轮播 -->
+  <swiper wx:else class="swiper-container" indicator-dots="{{true}}" autoplay="{{false}}">
+    <block wx:for="{{courses}}" wx:key="courseId">
+      <swiper-item>
+        <view class="card">
+          <image class="card-bg" src="../../images/backgroundimages/image.png"></image>
+          <view class="card-content">
+            <view class="card-header">
+              <text class="course-name">课程：{{item.courseName}}</text>
+            </view>
+            <view class="card-body">
+              <text class="info">授课教师：{{item.teacher}}</text>
+              <text class="info">授课教室：{{item.classroom}}</text>
+              <text class="info time highlight">上课时间：{{item.formattedTime}}</text>
+              <text class="info remaining">距离上课还有：{{item.leftTime}}</text>
+              <text class="info feedback-title">课堂反馈：</text>
+              <text class="info feedback-content">{{item.feedback}}</text>
+            </view>
+            <view class="card-footer">
+              <!-- 左边内容 -->
+              <view class="wisdom-left">
+                <text class="wisdom insight">看见智慧Wisdom insight：</text>
+                <text class="wisdom word">记者为什么要写悲观的事情，因为我们足够乐观和勇敢，才会选择直面悲观。</text>
+              </view>
+              <!-- 右边内容 -->
+              <text class="wisdom quotation">---电影《好东西》</text>
+            </view>
+          </view>
+          <text class="card-footer-tip">小提示：再次点击课程可以选择日期(*^▽^*)</text>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <!-- Vant 日历组件 -->
+  <van-calendar
+    id="calendar"
+    show="{{calendarConfig.show}}"
+    bind:close="onCalendarClose"
+    bind:confirm="onCalendarConfirm"
+    first-day-of-week="{{ 1 }}"
+    min-date="{{ calendarConfig.minDate }}"
+    max-date="{{ calendarConfig.maxDate }}"
+    color="#07c160"
+  />
+</view>

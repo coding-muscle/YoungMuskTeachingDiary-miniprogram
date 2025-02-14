@@ -1,0 +1,30 @@
+<view class="container">
+  <!-- 用户信息 -->
+  <view class="header">
+    <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+    <view class="info">
+      <!-- 添加调试信息 -->
+      <view class="username">用户名:{{userInfo.username}}</view>
+      <view class="userId">用户ID:{{userInfo.userId}}</view>
+    </view>
+  </view>
+
+  <!-- 设置项 -->
+  <view class="settings">
+    <view class="setting-item" bindtap="navigateToSetting">
+      <text>账号设置</text>
+      <!-- <image class="arrow" src="../../images/arrow-right.png"></image> -->
+    </view>
+    <view class="setting-item" bindtap="navigateToPrivacy">
+      <text>AI功能</text>
+      <!-- <image class="arrow" src="../../images/arrow-right.png"></image> -->
+    </view>
+    <view class="setting-item" bindtap="navigateToAbout">
+      <text>关于我们</text>
+      <!-- <image class="arrow" src="../../images/arrow-right.png"></image> -->
+    </view>
+  </view>
+
+  <!-- 退出按钮 -->
+  <button class="logout-button" bindtap="logout">退出登录</button>
+</view>

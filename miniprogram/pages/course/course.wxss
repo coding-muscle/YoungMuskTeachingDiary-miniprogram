@@ -1,0 +1,156 @@
+/* 删除 :root 选择器，直接在页面级别定义变量 */
+.page-container {
+  --primary-color: #333333;      /* 主文本色 */
+  --secondary-color: #666666;    /* 辅文本色 */
+  --highlight-color: #f62a2ab6;    /* 强调色 (示例蓝色) */
+  --border-color: #eeeeee;       /* 分割线颜色 */
+  --card-padding: 24rpx;         /* 卡片内边距 */
+}
+
+.swiper-container {
+  height: 1270rpx;
+  width: 100%;
+}
+
+.no-course-tip {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333333;
+  margin: auto;
+}
+
+.card {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 85%;
+  padding: 20px;
+  margin: 20px;
+  position: relative;
+  z-index: 3;
+  overflow: hidden; /* 防止背景图片溢出 */
+}
+
+.card-bg {
+  position: absolute;
+  width: 100%; /* 覆盖整个卡片 */
+  height: 100%; /* 覆盖整个卡片 */
+  object-fit: cover; /* 确保图片覆盖整个卡片 */
+  filter: blur(4px); /* 背景模糊 */
+  z-index: 1; /* 背景图片在最底层 */
+  top: 50%; /* 将图片顶部定位到卡片中间 */
+  left: 50%; /* 将图片左侧定位到卡片中间 */
+  transform: translate(-50%, -50%); /* 通过偏移实现居中 */
+}
+
+/* 半透明框 */
+.card-content {
+  height: 88%;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 2; /* 内容在背景图片之上 */
+}
+
+/* 课程名称样式 - 强化视觉层次 */
+.course-name {
+  display: block;
+  font-size: 20px;               /* 增大字号突出标题 */
+  font-weight: 600;              /* 中等加粗 */
+  color: var(--primary-color);
+  margin-bottom: 32rpx;          /* 改用下外边距 */
+  border-bottom: 2rpx solid var(--border-color); /* 添加分割线 */
+  padding-bottom: 16rpx;         /* 调整分割线间距 */
+}
+
+/* 信息项通用样式 - 增强可读性 */
+.info {
+  display: flex;                 /* 启用flex布局 */
+  align-items: center;           /* 垂直居中 */
+  font-size: 14px;
+  color: var(--secondary-color);
+  line-height: 1.6;              /* 增加行高 */
+  margin-bottom: 24rpx;          /* 统一间距单位 */
+}
+
+.info::before {
+  content: "•";
+  margin-right: 12rpx;
+  font-size: 16px;
+}
+
+/* 特殊强调样式 */
+.info.time {             /* 针对上课时间 */
+  color: var(--highlight-color);
+  font-weight: 500;
+}
+
+.info.remaining {               /* 针对剩余时间 */
+  color: var(--highlight-color);
+  font-weight: 500;
+}
+
+.info.feedback-title {
+  font-weight: 500;
+  color: var(--highlight-color);
+  margin-bottom: 10rpx;
+}
+
+.info.feedback-content::before {
+  display: none;
+}
+
+/* 课堂反馈内容样式 */
+.info.feedback-content {
+  width: 100%;
+  text-indent: 2em; /* 设置首行缩进为 2 个字符宽度 */
+}
+
+/* 卡片底部布局优化 */
+.card-footer {
+  display: flex;               /* 启用 Flex 布局 */
+  flex-direction: column;
+  justify-content: space-between; /* 左右内容分别靠边 */
+  align-items: flex-start;     /* 顶部对齐 */
+  width: 100%;                 /* 确保宽度占满父元素 */
+  margin-top: 32rpx;
+  padding-top: 24rpx;
+  border-top: 2rpx solid rgba(0, 0, 0, 0.05); /* 浅色分割线 */
+}
+
+/* 通用 Wisdom 样式 */
+.wisdom {
+  font-style: italic;          /* 斜体强调 */
+  color: #999999;              /* 降低对比度 */
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 0;
+}
+
+/* 左边内容容器 */
+.wisdom-left {
+  display: flex;
+  flex-direction: column;      /* 垂直排列 */
+  align-items: flex-start;     /* 靠左对齐 */
+  flex: 1;                     /* 占据剩余空间 */
+  margin-right: 20rpx;         /* 与右边内容保持间距 */
+}
+
+.wisdom.word {
+  text-indent: 2em;
+}
+
+/* 右边内容 */
+.wisdom.quotation {
+  width: 100%;
+  text-align: right;           /* 靠右对齐 */
+  white-space: nowrap;         /* 防止换行 */
+}
+
+.card-footer-tip {
+  position: absolute;
+  bottom: 30rpx;
+  text-align: center;
+  z-index: 2;
+}

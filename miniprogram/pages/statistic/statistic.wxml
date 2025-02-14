@@ -1,0 +1,13 @@
+<view class="container">
+  <view class="picker-container">
+    <picker mode="selector" range="{{semesters}}" bindchange="onSemesterChange">
+      <view class="picker">选择学期：{{selectedSemester}}</view>
+    </picker>
+    <picker mode="selector" range="{{subjects}}" bindchange="onSubjectChange">
+      <view class="picker">选择科目：{{selectedSubject}}</view>
+    </picker>
+  </view>
+  <view class="chart-container">
+    <canvas canvas-id="scoreChart" class="chart"></canvas>
+  </view>
+</view>
