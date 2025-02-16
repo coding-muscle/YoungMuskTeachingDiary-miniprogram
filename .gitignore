@@ -1,5 +1,5 @@
-.node_modules
-.miniprogram_npm
+node_modules
+miniprogram/miniprogram_npm
 .vscode
 .env
 dist
