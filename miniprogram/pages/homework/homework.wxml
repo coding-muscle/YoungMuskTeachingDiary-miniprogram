@@ -19,14 +19,13 @@
   <block wx:for="{{filteredHomeworks}}" wx:key="index">
     <view class="card">
       <view class="card-header">
-        <text class="title">作业内容：{{item.content}}</text>
+        <text class="title">作业内容：</text>
+        <text class="content">{{item.workContent}}</text>
       </view>
       <view class="card-body">
-        <text class="info">布置时间：{{item.time}}</text>
+        <text class="info">布置时间：{{item.setTime}}</text>
         <text class="info">布置教师：{{item.teacher}}</text>
-        <text class="info {{item.status === '已完成' ? 'completed' : 'uncompleted'}}">
-          完成情况：{{item.status}}
-        </text>
+        <text class="info status {{item.workStatus === '已完成' ? 'completed' : 'uncompleted'}}">作业状态：{{item.workStatus}}</text>
       </view>
     </view>
   </block>
