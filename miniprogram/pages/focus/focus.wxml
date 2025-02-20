@@ -7,10 +7,23 @@
       value="{{focusTime}}"
     />
   </view>
-  <button bindtap="startCountdown" disabled="{{isCounting}}">
-    {{isCounting ? '倒计时中...' : '开始专注'}}
-  </button>
+
   <view class="countdown">
     <text>剩余时间：{{countdown}}</text>
   </view>
+  
+  <van-circle
+    value="{{ leftTime }}"
+    stroke-width="20" 
+    size="300" 
+    text="剩余时间{{countdown}}"
+    clockwise="{{ false }}"
+  />
+
+  <button bindtap="startCountdown" disabled="{{isCounting}}">
+    {{isCounting ? '倒计时中...' : '开始专注'}}
+  </button>
+  <button bindtap="startCountdown" disabled="{{isCounting}}">
+    {{isCounting ? '倒计时中...' : '停止专注'}}
+  </button>
 </view>

@@ -1,9 +1,12 @@
+const apiConfig = require('../../config/apiConfig');
+
 Page({
   data: {
     focusTime: null, // 用户输入的专注时间（分钟）
-    countdown: '00:00:00', // 倒计时显示
     isCounting: false, // 是否正在倒计时
     timer: null, // 定时器
+    countdown: '00:00:00', // 倒计时显示
+    leftTime: null, // 剩余时间（秒）
   },
 
   // 监听用户输入
@@ -18,8 +21,11 @@ Page({
     if (!this.data.focusTime || this.data.isCounting) return;
 
     const focusTimeInSeconds = this.data.focusTime * 60; // 将分钟转换为秒
+    const startTime = new Date();
+    
     this.setData({
       isCounting: true,
+      startTime: startTime
     });
 
     let remainingTime = focusTimeInSeconds;
@@ -30,6 +36,9 @@ Page({
       remainingTime--;
       if (remainingTime >= 0) {
         this.updateCountdown(remainingTime);
+        this.setData({
+          leftTime: remainingTime
+        });
       } else {
         this.stopCountdown();
         wx.showToast({
@@ -51,17 +60,40 @@ Page({
     });
   },
 
+  // 格式化时间（补零）
+  formatTime(time) {
+    return time < 10 ? `0${time}` : time;
+  },
+
   // 停止倒计时
   stopCountdown() {
+    const userId = wx.getStorageSync('userId');
+    const focusDurationInSec = this.data.focusTime * 60;
+
     clearInterval(this.data.timer);
     this.setData({
       isCounting: false,
       countdown: '00:00:00',
     });
-  },
 
-  // 格式化时间（补零）
-  formatTime(time) {
-    return time < 10 ? `0${time}` : time;
+    wx.request({
+      url: apiConfig.creatFocusUrl,
+      method: 'POST',
+      data: {
+        userId: userId,
+        startTime: this.data.startTime,
+        focusDuration: focusDurationInSec
+      },
+      success: (res) => {
+        return res.data;
+      },
+      fail: (err) => {
+        console.error('请求出错:', err);
+        wx.showToast({
+          title: '倒计时失败，请稍后重试',
+          icon: 'none',
+        });
+      },
+    });
   },
 });

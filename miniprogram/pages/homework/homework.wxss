@@ -63,11 +63,11 @@
 
 .title {
   display: flex;
-  flex-direction: column;      /* 垂直排列 */
-  align-items: flex-start;     /* 靠左对齐 */
-  flex: 1;                     /* 占据剩余空间 */
-  margin-right: 20rpx;         /* 与右边内容保持间距 */
-  width: 100%;                 /* 宽度撑满 */
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  margin-right: 20rpx;
+  width: 100%;
   margin-bottom: 10rpx;
 }
 
@@ -78,7 +78,7 @@
 .card-body {
   display: flex;
   flex-direction: column;
-  gap: 8px; /* 使用 gap 替代 margin-bottom */
+  gap: 8px;
 }
 
 .info {

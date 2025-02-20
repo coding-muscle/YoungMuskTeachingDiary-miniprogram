@@ -10,5 +10,6 @@ module.exports = {
   setProfileUrl: `${baseUrl}/api/profile/set-profile`,
   getProfileUrl: `${baseUrl}/api/profile/get-profile`,
   getCourseUrl: `${baseUrl}/api/course/get-course`,
-  getHomeworkUrl: `${baseUrl}/api/homework/get-homework`
+  getHomeworkUrl: `${baseUrl}/api/homework/get-homework`,
+  creatFocusUrl: `${baseUrl}/api/focus/create-focus`
 };

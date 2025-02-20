@@ -28,7 +28,6 @@ Page({
             setTime: homework.setTime.split('T')[0],
             workStatus: homework.workStatus === '0' ? '未完成' : '已完成'  // 添加状态文字
           }));
-          console.log('作业列表:', formattedData);
           
           this.setData({
             homeworks: formattedData,
