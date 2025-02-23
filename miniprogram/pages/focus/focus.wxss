@@ -4,11 +4,21 @@
   align-items: center;
   min-height: 100vh;
   padding: 20px;
-  background-color: #f5f6fa;
 }
-  
+
+.countdown-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+}
+
 .input-container {
-  margin-bottom: 20px;
+  margin: 0;
+  position: fixed;
+  bottom: 110px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .input {
@@ -18,14 +28,29 @@
   width: 200px;
   text-align: center;
 }
-  
-.button {
-  margin-bottom: 20px;
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+  margin: 20px auto 0;
+  padding: 6px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+
 }
-  
-.countdown {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 20rpx;
+
+.button-container button {
+  width: 100%;
+  background-color: #07c160;
+  color: white;
+}
+
+.button-container button.active {
+  background-color: #ff4d4f;
+  color: white;
 }
