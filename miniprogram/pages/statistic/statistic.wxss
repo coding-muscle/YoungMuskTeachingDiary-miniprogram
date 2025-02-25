@@ -1,30 +1,107 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
   
-  .picker-container {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  
-  .picker {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .chart-container {
-    width: 100%;
-    height: 300px;
-  }
-  
-  .chart {
-    width: 100%;
-    height: 100%;
-  }
+.picker-container {
+  display: flex;
+  justify-content: space-around;
+  width: 90%; /* 适当减少容器宽度 */
+  margin: 20px auto; /* 居中显示 */
+  padding: 0 20rpx; /* 添加内边距 */
+}
+
+.picker {
+  flex: 1;
+  margin: 0 6px;
+  padding: 0px 0;
+  border: none;
+  border-radius: 8px;
+  color: #666;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+/* 添加点击反馈效果 */
+.picker:active {
+  background: #f5f5f5;
+  transform: scale(0.98);
+}
+
+.placeholder {
+  color: #bfbfbf;
+  font-size: 14px;
+}
+
+.swiper-container {
+  height: 1130rpx;
+  width: 95%;
+}
+
+.stat-card {
+  background: #fff;
+  margin: 0 20rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0,0,0,0.05);
+  padding: 24rpx;
+  height: 90%;
+}
+
+.card-header {
+  margin-bottom: 40rpx;
+}
+
+.title {
+  display: block;
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 12rpx;
+}
+
+.subtitle {
+  display: block;
+  font-size: 24rpx;
+  color: #95a5a6;
+}
+
+.ec-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 30vh; /* 使用视口高度单位，确保高度适配不同设备 */
+  min-height: 200px; /* 设置最小高度，避免内容过小 */
+  box-sizing: border-box; /* 确保 padding 和 border 不会影响容器尺寸 */
+  padding: 10px; /* 增加内边距，避免内容紧贴边缘 */
+  background-color: #f9f9f9; /* 添加背景色，提升视觉效果 */
+  border-radius: 8px; /* 圆角设计，提升美观度 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 添加阴影，增加层次感 */
+  margin-bottom: 10rpx; /* 增加外边距，增加视觉效果 */
+}
+
+.ec-canvas {
+  width: 100%;
+  height: 100%;
+  max-width: 100%; /* 防止图表超出容器 */
+  max-height: 100%; /* 防止图表超出容器 */
+  touch-action: none; /* 防止触摸事件干扰图表操作 */
+}
+
+.analysis-result {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.analysis-result .analysis-result-text {
+  display: block;
+  margin: 5px 0;
+  font-size: 14px;
+  color: #333;
+}

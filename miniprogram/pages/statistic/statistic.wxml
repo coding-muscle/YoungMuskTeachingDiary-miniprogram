@@ -1,13 +1,77 @@
 <view class="container">
   <view class="picker-container">
+    <!-- 选择学期 -->
     <picker mode="selector" range="{{semesters}}" bindchange="onSemesterChange">
-      <view class="picker">选择学期：{{selectedSemester}}</view>
+      <view class="picker">
+        <text wx:if="{{!selectedSemester}}" class="placeholder">选择学期</text>
+        <text wx:else>{{selectedSemester}}</text>
+      </view>
     </picker>
+
+    <!-- 选择科目 -->
     <picker mode="selector" range="{{subjects}}" bindchange="onSubjectChange">
-      <view class="picker">选择科目：{{selectedSubject}}</view>
+      <view class="picker">
+        <text wx:if="{{!selectedSubject}}" class="placeholder">选择科目</text>
+        <text wx:else>{{selectedSubject}}</text>
+      </view>
     </picker>
   </view>
-  <view class="chart-container">
-    <canvas canvas-id="scoreChart" class="chart"></canvas>
-  </view>
+
+  <swiper
+    class="swiper-container" 
+    indicator-dots="{{true}}" 
+    autoplay="{{false}}"
+    circular="{{false}}"
+  >
+    <swiper-item>
+      <view class="stat-card">
+        <view class="card-header">
+          <text class="title">📊 成绩统计</text>
+          <text class="subtitle">近期考试成绩趋势</text>
+        </view>
+        <view class="ec-container">
+          <ec-canvas class="ec-canvas" canvas-id="mychart-dom-bar" ec="{{ec}}"></ec-canvas>
+        </view>
+        <view class="analysis-result">
+          <text class="analysis-result-text">📈 平均分: {{analysisResult.average}}</text>
+          <text class="analysis-result-text">📊 方差: {{analysisResult.variance}}</text>
+          <text class="analysis-result-text">🏆 最高分: {{analysisResult.max}}</text>
+          <text class="analysis-result-text">📉 最低分: {{analysisResult.min}}</text>
+        </view>
+      </view>
+    </swiper-item>
+
+    <!-- 课程时间统计卡片 -->
+    <swiper-item>
+      <view class="stat-card">
+        <view class="card-header">
+          <text class="title">⏳ 课程时长</text>
+          <text class="subtitle">各科目学习时间分布</text>
+        </view>
+        
+      </view>
+    </swiper-item>
+
+    <!-- 作业统计卡片 -->
+    <swiper-item>
+      <view class="stat-card">
+        <view class="card-header">
+          <text class="title">📚 作业完成</text>
+          <text class="subtitle">各科作业完成情况</text>
+        </view>
+        
+      </view>
+    </swiper-item>
+
+    <!-- 专注统计卡片 -->
+    <swiper-item>
+      <view class="stat-card">
+        <view class="card-header">
+          <text class="title">🎯 专注时间</text>
+          <text class="subtitle">近7天专注时长趋势</text>
+        </view>
+        
+      </view>
+    </swiper-item>
+  </swiper>
 </view>

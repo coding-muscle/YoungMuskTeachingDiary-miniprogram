@@ -1,18 +1,97 @@
+import * as echarts from "../../ec-canvas/echarts";
+const apiConfig = require('../../config/apiConfig');
+
 Page({
   data: {
-    semesters: ['2025年上', '2025年下', '2026年上', '2026年下'],
-    subjects: ['物理', '数学', '化学', '英语'],
+    userId: '',
+    semesters: ['2024年下', '2025年上'],
+    subjects: ['数学', '英语', '物理', '化学'],
     selectedSemester: '2025年上',
     selectedSubject: '物理',
-    scores: [85, 90, 88, 92, 95], // 示例成绩数据
-    chartContext: null,
+    examNames: [],
+    examScores: [],
+    analysisResult: {
+      average: 0, // 平均数
+      variance: 0, // 方差
+      max: 0, // 最高分
+      min: 0 // 最低分
+    },
+    ec: {
+      onInit: null
+    }
   },
 
-  onLoad() {
-    this.setData({
-      chartContext: wx.createCanvasContext('scoreChart'),
+  chartInstance: null, // 使用页面属性存储图表实例
+
+  // 初始化图表（确保只执行一次）
+  initChart(canvas, width, height, dpr) {
+    if (this.chartInstance) return this.chartInstance;
+
+    const chart = echarts.init(canvas, null, {
+      width: width,
+      height: height,
+      devicePixelRatio: dpr
     });
-    this.drawChart();
+    canvas.setChart(chart);
+    this.chartInstance = chart;
+
+    // 初始化默认配置
+    const option = {
+      xAxis: {},
+      yAxis: {},
+      series: [],
+      grid: {}
+    };
+    chart.setOption(option);
+
+    return chart;
+  },
+
+
+  // 更新图表数据
+  updateChart(examNames, examScores) {
+    if (!this.chartInstance) {
+      console.error('图表实例未初始化，请检查 ec-canvas 组件');
+      return;
+    }
+
+    // 确保数据有效
+    if (!Array.isArray(examScores) || examScores.length === 0) {
+      console.warn('无效的图表数据:', examScores);
+      return;
+    }
+
+    const option = {
+      xAxis: {
+        type: 'category',
+        data: examNames
+      },
+      yAxis: {
+        type: 'value',
+        min: 'dataMin', // 自动计算最小值
+        max: 'dataMax',  // 自动计算最大值
+        name: '成绩'
+      },
+      series: [
+        {
+          data: examScores,
+          type: 'line',
+          symbol: 'circle', // 数据点样式
+          symbolSize: 8,
+          itemStyle: {
+            color: '#1890ff' // 线条颜色
+          }
+        }
+      ],
+      grid: {
+        left: 30,
+        right: 20,
+        top: 30,
+        bottom: 30
+      }
+    };
+    
+    this.chartInstance.setOption(option);
   },
 
   // 选择学期
@@ -21,7 +100,9 @@ Page({
     this.setData({
       selectedSemester: this.data.semesters[index],
     });
-    this.updateChart();
+    if (this.data.selectedSubject !== '') {
+      this.getExamInfo();
+    }
   },
 
   // 选择科目
@@ -30,91 +111,87 @@ Page({
     this.setData({
       selectedSubject: this.data.subjects[index],
     });
-    this.updateChart();
+    if (this.data.selectedSemester !== '') {
+      this.getExamInfo();
+    }
   },
 
-  // 更新图表
-  updateChart() {
-    // 根据学期和科目更新成绩数据
-    const newScores = this.getScores(
-      this.data.selectedSemester,
-      this.data.selectedSubject
-    );
+  // 计算分析结果
+  calculateAnalysis(scores) {
+    if (scores.length === 0) return { average: 0, variance: 0, max: 0, min: 0 };
+
+    const sum = scores.reduce((acc, score) => acc + score, 0);
+    const average = (sum / scores.length).toFixed(2);
+
+    const variance = (scores.reduce((acc, score) => acc + Math.pow(score - average, 2), 0) / scores.length).toFixed(2);
+
+    const max = Math.max(...scores);
+    const min = Math.min(...scores);
+
+    return { average, variance, max, min };
+  },
+
+  // 获取考试信息
+  getExamInfo() {
+    const userId = wx.getStorageSync('userId');
+
+    wx.request({
+      url: apiConfig.getExamUrl,
+      method: 'POST',
+      data: {
+        userId: userId,
+        semester: this.data.selectedSemester,
+        subject: this.data.selectedSubject
+      },
+      success: (res) => {
+        if (res.statusCode === 200) {
+          const examData = res.data;
+          const extractedScores = examData.map(item => item.examScore);
+          const analysisResult = this.calculateAnalysis(extractedScores);
+          const examNames = extractedScores.map((_, index) => `${index + 1}`);
+
+          // 更新数据
+          this.setData({
+            userId: userId,
+            examScores: extractedScores,
+            examNames: examNames,
+            analysisResult: analysisResult,
+          });
+          
+          setTimeout(() => {
+            this.updateChart(this.data.examNames, this.data.examScores);
+          }, 100);
+
+        } else {
+          console.error('请求失败，状态码:', res.statusCode);
+          wx.showToast({
+            title: '请求失败，请稍后重试',
+            icon: 'none',
+          });
+        }
+      },
+      fail: (err) => {
+        console.error('请求出错:', err);
+        wx.showToast({
+          title: '请求数据失败，请稍后重试',
+          icon: 'none',
+        });
+      },
+    });
+  },
+
+  onLoad() {
     this.setData({
-      scores: newScores,
-    });
-    this.drawChart();
-  },
-
-  // 获取成绩数据（示例）
-  getScores(semester, subject) {
-    // 模拟数据
-    const data = {
-      '2025年上': {
-        物理: [85, 90, 88, 92, 95],
-        数学: [80, 85, 82, 88, 90],
-        化学: [78, 82, 85, 88, 90],
-        英语: [90, 92, 88, 85, 90],
-      },
-      '2025年下': {
-        物理: [88, 92, 90, 94, 96],
-        数学: [85, 88, 90, 92, 95],
-        化学: [80, 85, 88, 90, 92],
-        英语: [92, 94, 90, 88, 92],
-      },
-    };
-    return data[semester]?.[subject] || [];
-  },
-
-  // 绘制折线图
-  drawChart() {
-    const ctx = this.data.chartContext;
-    const scores = this.data.scores;
-    const width = 300; // 画布宽度
-    const height = 200; // 画布高度
-    const padding = 20; // 内边距
-    const maxScore = Math.max(...scores, 100); // 最大分数
-    const xAxisLength = width - 2 * padding; // X轴长度
-    const yAxisLength = height - 2 * padding; // Y轴长度
-    const xStep = xAxisLength / (scores.length - 1); // X轴步长
-    const yStep = yAxisLength / maxScore; // Y轴步长
-
-    // 清空画布
-    ctx.clearRect(0, 0, width, height);
-
-    // 绘制坐标轴
-    ctx.beginPath();
-    ctx.moveTo(padding, padding);
-    ctx.lineTo(padding, height - padding);
-    ctx.lineTo(width - padding, height - padding);
-    ctx.stroke();
-
-    // 绘制折线
-    ctx.beginPath();
-    scores.forEach((score, index) => {
-      const x = padding + index * xStep;
-      const y = height - padding - score * yStep;
-      if (index === 0) {
-        ctx.moveTo(x, y);
-      } else {
-        ctx.lineTo(x, y);
+      ec: {
+        onInit: (canvas, width, height, dpr) => this.initChart(canvas, width, height, dpr)
       }
-      // 绘制数据点
-      ctx.arc(x, y, 3, 0, 2 * Math.PI);
-      ctx.fillText(score, x - 5, y - 10);
     });
-    ctx.stroke();
-
-    // 绘制X轴标签
-    scores.forEach((_, index) => {
-      const x = padding + index * xStep;
-      ctx.fillText(`第${index + 1}次`, x - 10, height - padding + 15);
-    });
-
-    // 绘制Y轴标签
-    ctx.fillText('分数', padding - 15, padding + 10);
-
-    // 渲染画布
-    ctx.draw();
+    this.getExamInfo(); // 页面加载时获取考试信息
   },
+
+  onShow() {
+    setTimeout(() => {
+      this.updateChart(this.data.examNames, this.data.examScores);
+    }, 100);
+  }
 });
