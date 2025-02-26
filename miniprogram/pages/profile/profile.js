@@ -5,7 +5,7 @@ Page({
     userInfo: {
       username: '',
       userId: '',
-      avatarUrl: '../../images/icons/avatar.png'
+      avatarUrl: ''
     }, // 用户信息
   },
 
@@ -30,14 +30,11 @@ Page({
               avatarUrl:user.avatarUrl,
             },
           });
-          console.log(this.data.userInfo);
-          
         } else {
           wx.showToast({
             title: '获取用户信息失败',
             icon: 'none'
           });
-          console.log('获取用户信息失败1');
         }
       },
       fail: () => {
@@ -45,7 +42,6 @@ Page({
           title: '获取用户信息失败，请稍后重试',
           icon: 'none',
         });
-        console.log('获取用户信息失败2');
       },
     });
   },

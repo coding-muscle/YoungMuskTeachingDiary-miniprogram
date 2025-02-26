@@ -7,12 +7,12 @@ Page({
     semesters: ['2024年下', '2025年上'],
     subjects: ['数学', '英语', '物理', '化学'],
     selectedSemester: '2025年上',
-    selectedSubject: '物理',
+    selectedSubject: '数学',
     examNames: [],
     examScores: [],
     analysisResult: {
       average: 0, // 平均数
-      variance: 0, // 方差
+      standardDeviation: 0, // 方差
       max: 0, // 最高分
       min: 0 // 最低分
     },
@@ -76,6 +76,15 @@ Page({
         {
           data: examScores,
           type: 'line',
+          label: {
+            show: true,
+            position: 'top',
+            textStyle: {
+              fontSize: 12,
+              fontFamily: 'Arial Narrow Bold',
+              fontWeight: 'bold'
+            }
+          },
           symbol: 'circle', // 数据点样式
           symbolSize: 8,
           itemStyle: {
@@ -124,11 +133,12 @@ Page({
     const average = (sum / scores.length).toFixed(2);
 
     const variance = (scores.reduce((acc, score) => acc + Math.pow(score - average, 2), 0) / scores.length).toFixed(2);
+    const standardDeviation = Math.sqrt(variance).toFixed(2);
 
     const max = Math.max(...scores);
     const min = Math.min(...scores);
 
-    return { average, variance, max, min };
+    return { average, standardDeviation, max, min };
   },
 
   // 获取考试信息
@@ -160,7 +170,7 @@ Page({
           
           setTimeout(() => {
             this.updateChart(this.data.examNames, this.data.examScores);
-          }, 100);
+          }, 500);
 
         } else {
           console.error('请求失败，状态码:', res.statusCode);

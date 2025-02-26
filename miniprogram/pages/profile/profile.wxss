@@ -1,58 +1,99 @@
-.container {
-  padding: 20px;
-  height: 45rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+/* 定义 CSS 变量 */
+page {
+  --primary-color: #00BFFF; /* 主色调 */
+  --danger-color: #FF4D4F; /* 危险操作颜色 */
+  --text-color: #333333; /* 文字颜色 */
+  --border-color: #EEEEEE; /* 边框颜色 */
+  --background-color: #FFFFFF; /* 背景颜色 */
+  --font-size-normal: 16px; /* 正常字体大小 */
+  --font-size-small: 14px; /* 小字体大小 */
 }
 
-.header {
-  width: 75%;
+/* 容器样式 */
+.container {
+  padding: 20px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--background-color);
+}
+
+/* 用户信息 */
+.user-info-container {
+  width: 100%;
   padding: 20px;
   display: flex;
   align-items: center;
-  margin-bottom: 20rpx;
 }
 
 .avatar {
   width: 80rpx;
   height: 80rpx;
   border-radius: 50%;
-  margin-right: 30rpx;
+  margin-right: 20px;
 }
 
-.nickname {
-  color: #333333;
-  margin: 5px 0;
+.info {
+  display: flex;
+  flex-direction: column;
 }
 
-.settings {
-  width: 80%;
+.username, .userId {
+  font-size: var(--font-size-normal);
+  color: var(--text-color);
+  margin-bottom: 10rpx;
+}
+
+.username {
+  font-weight: bold;
+}
+
+.userId {
+  font-size: var(--font-size-small);
+  color: #666666;
+}
+
+/* 设置项 */
+.settings-container {
+  width: 100%;
+  margin-top: 20px;
 }
 
 .setting-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 15px;
-  border-bottom: 1px solid #EEEEEE;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.setting-item text {
-  font-size: 16px;
-  color: #333333;
+.setting-item .icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 15px;
 }
 
-.arrow {
+.setting-item .text {
+  flex: 1;
+  font-size: var(--font-size-normal);
+  color: var(--text-color);
+}
+
+.setting-item .arrow {
   width: 20px;
   height: 20px;
 }
 
+/* 退出按钮 */
 .logout-button {
   margin-top: 30px;
   width: 80%;
-  background-color: #FF4D4F;
+  background-color: var(--danger-color);
   color: #FFFFFF;
   border-radius: 5px;
+  font-size: var(--font-size-normal);
+}
+
+.logout-button:active {
+  opacity: 0.8; /* 点击时透明度变化 */
 }

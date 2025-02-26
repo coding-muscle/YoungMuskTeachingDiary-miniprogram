@@ -21,23 +21,33 @@
     "list": [
       {
         "pagePath": "pages/course/course",
-        "text": "课程"
+        "text": "课程",
+        "iconPath": "images/tabBar-icons/course.png",
+        "selectedIconPath": "images/tabBar-icons/course-active.png"
       },
       {
         "pagePath": "pages/homework/homework",
-        "text": "作业"
+        "text": "作业",
+        "iconPath": "images/tabBar-icons/homework.png",
+        "selectedIconPath": "images/tabBar-icons/homework-active.png"
       },
       {
         "pagePath": "pages/focus/focus",
-        "text": "专注"
+        "text": "专注",
+        "iconPath": "images/tabBar-icons/focus.png",
+        "selectedIconPath": "images/tabBar-icons/focus-active.png"
       },
       {
         "pagePath": "pages/statistic/statistic",
-        "text": "统计"
+        "text": "统计",
+        "iconPath": "images/tabBar-icons/statistic.png",
+        "selectedIconPath": "images/tabBar-icons/statistic-active.png"
       },
       {
         "pagePath": "pages/profile/profile",
-        "text": "我的"
+        "text": "我的",
+        "iconPath": "images/tabBar-icons/profile.png",
+        "selectedIconPath": "images/tabBar-icons/profile-active.png"
       }
     ]
   },
@@ -46,6 +56,7 @@
     "van-field": "@vant/weapp/field/index",
     "van-calendar": "@vant/weapp/calendar/index",
     "van-count-down": "@vant/weapp/count-down/index",
+    "van-icon": "@vant/weapp/icon/index",
     "ec-canvas": "ec-canvas/ec-canvas"
   }
 }

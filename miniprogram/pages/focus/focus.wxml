@@ -5,6 +5,7 @@
       millisecond
       time="{{ time }}"
       bind:finish="finishCountdown"
+      format="HH:mm:ss:SSS"
     />
   </view>
 

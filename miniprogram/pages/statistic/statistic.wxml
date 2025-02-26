@@ -34,7 +34,7 @@
         </view>
         <view class="analysis-result">
           <text class="analysis-result-text">📈 平均分: {{analysisResult.average}}</text>
-          <text class="analysis-result-text">📊 方差: {{analysisResult.variance}}</text>
+          <text class="analysis-result-text">📊 标准差: {{analysisResult.standardDeviation}}</text>
           <text class="analysis-result-text">🏆 最高分: {{analysisResult.max}}</text>
           <text class="analysis-result-text">📉 最低分: {{analysisResult.min}}</text>
         </view>
